@@ -25,7 +25,6 @@ and GPRO Keyboards.
 %setup -q
 %patch 1 -p1
 
-
 %build
 make debug
 
@@ -39,7 +38,7 @@ install -m 755 -d \
   %{buildroot}%{_udevrulesdir} \
   %{buildroot}%{_unitdir}
 install -p -m 755 bin/%{name} %{buildroot}%{_bindir}
-for alias in 213 410 413 512 513 610 910 pro; do
+for alias in 213 410 413 513 610 910 pro; do
   ln -s %{name} "%{buildroot}%{_bindir}/g${alias}-led"
 done
 install -p -m 644 sample_profiles/* %{buildroot}%{_sysconfdir}/%{name}/samples
@@ -67,6 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/g???-led
 %{_udevrulesdir}/%{name}.rules
 %{_unitdir}/%{name}-reboot.service
+%{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/%{name}
 
 %changelog
