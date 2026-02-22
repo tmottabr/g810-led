@@ -5,6 +5,7 @@ Release:   1%{?dist}
 License:   GPLv3
 URL:       https://github.com/MatMoul/g810-led
 Source0:   https://github.com/MatMoul/%{name}/archive/v%{version}.tar.gz
+Patch1:    fedora.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 
@@ -22,6 +23,7 @@ and GPRO Keyboards.
 
 %prep
 %setup -q
+%patch 1 -p1
 
 
 %build
@@ -43,6 +45,7 @@ done
 install -p -m 644 sample_profiles/* %{buildroot}%{_sysconfdir}/%{name}/samples
 install -p -m 644 udev/%{name}.rules %{buildroot}%{_udevrulesdir}
 install -p -D -m 0644 systemd/%{name}-reboot.service %{buildroot}%{_unitdir}
+install -p -D -m 0644 systemd/%{name}.service %{buildroot}%{_unitdir}
 
 
 %post
@@ -67,26 +70,4 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/%{name}
 
 %changelog
-* Sun Feb 22 2026 Thiago Motta <thiago@motta.eti.br> - 0.4.3-1
-- Update to 0.4.3
-
-* Thu May 21 2020 Lars Kiesow <lkiesow@uos.de> - 0.4.2-1
-- Update to 0.4.2
-
-* Thu May 07 2020 Lars Kiesow <lkiesow@uos.de> - 0.4.1-1
-- Update to 0.4.1
-
-* Wed Apr 29 2020 Lars Kiesow <lkiesow@uos.de> - 0.4.0-1
-- Update to 0.4.0
-
-* Sun Sep 22 2019 Lars Kiesow <lkiesow@uos.de> - 0.3.9-1
-- Update to 0.3.9
-
-* Thu Aug 29 2019 Lars Kiesow <lkiesow@uos.de> - 0.3.8-1
-- Update to 0.3.8
-
-* Wed Aug 21 2019 Lars Kiesow <lkiesow@uos.de> - 0.3.7-1
-- Update to 0.3.7
-
-* Wed Oct 31 2018 Lars Kiesow <lkiesow@uos.de> - 0.2.8-1
-- Initial packaging
+%autochangelog
