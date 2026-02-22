@@ -38,7 +38,7 @@ install -m 755 -d \
   %{buildroot}%{_udevrulesdir} \
   %{buildroot}%{_unitdir}
 install -p -m 755 bin/%{name} %{buildroot}%{_bindir}
-for alias in 213 410 413 513 610 910 pro; do
+for alias in 213 410 413 512 513 610 910 pro; do
   ln -s %{name} "%{buildroot}%{_bindir}/g${alias}-led"
 done
 install -p -m 644 sample_profiles/* %{buildroot}%{_sysconfdir}/%{name}/samples
